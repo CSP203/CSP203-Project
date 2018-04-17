@@ -1,0 +1,9 @@
+Prerna Garg
+2016csb1050
+My work for the coming 2 week:
+
+1) Create a cache for the calculated vectors and store in the database
+2) Create/update CSV files through HTML
+3) PHP file to view courses for a professor
+4) PHP file to run Python script
+5) Schema update to facilitate image handling
