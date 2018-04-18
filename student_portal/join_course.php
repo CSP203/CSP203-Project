@@ -1,7 +1,6 @@
 <?php
     session_start();
 ?>
-
 <!DOCTYPE HTML>
 <!--
 	Aesthetic by gettemplates.co
@@ -106,9 +105,19 @@
 		<div class="gtco-container">
 			<div class="row row-mt-15em">
 				<div class="col-md-12 mt-text text-center animate-box" data-animate-effect="fadeInUp">
-		
-					<h2>Following is the list of courses not yet resistered for.</h2>
-					  <?php
+					<h1>Displaying list of courses not registered for..</h1>	
+					<h2 style="font-size:30px">Click on the course you want to enroll for, Hope you have already uploaded the photos required for your attendance.</h2>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="flex-section gtco-gray-bg">
+		<div class="col-1">
+			<div class="text">
+
+				<div class="row">
+                <?php
                     $servername = "localhost";
                     $username = "root";
                     $password = "";
@@ -125,44 +134,58 @@
                             $get_id = $row[0];
                         }
                         $sql="SELECT FirstName,cn FROM instructor INNER JOIN (SELECT InstructorID, alias1.CourseName as cn FROM instructor_courses INNER JOIN (Select CourseName,CourseID from course WHERE CourseID NOT IN (SELECT CourseID FROM student_attendance WHERE StudentID = $get_id ))alias1 ON alias1.CourseID = instructor_courses.CourseID)alias2 ON alias2.InstructorID = instructor.InstructorID;";
-
                         $result = mysqli_query($conn,$sql);
                         if ($result)
                         {
+                            echo "<ol style=\"font-size:30px;\">";
                             echo "<form method= \"post\"";
                             while ($row=mysqli_fetch_row($result))
                             {
                                 $cour = $row['cn'];
                                 $prof = $row['FirstName'];
-                                echo "<input type=\"checkbox\" name=\"$cour\" value=\"$cour\"> Course: $cour - Instructor: $prof"; 
+                                echo "<li><input type=\"checkbox\" name=\"$cour\" value=\"$cour\"> Course: $cour - Instructor: $prof</li>"; 
                             }
-                            echo "</form>";
+                            echo "</form></ol>";
                         }
-                        echo "No courses found";
+                        echo "<h1>No courses found to register for. Please talk to your course instructor to verify if he has added the course you are looking for.</h1><br><h2>Have a nice day :)</h2>";
                     }else{
-
                     }
                     mysqli_close($conn);
                 ?>
 				</div>
 			</div>
 		</div>
-	</header>
 	</div>
+
 	</div>
+
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
+	
+	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
 	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
 	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
 	<script src="js/jquery.waypoints.min.js"></script>
 	<script src="js/sticky.js"></script>
+	<!-- Carousel -->
 	<script src="js/owl.carousel.min.js"></script>
+	<!-- countTo -->
 	<script src="js/jquery.countTo.js"></script>
+
+	<!-- Stellar Parallax -->
 	<script src="js/jquery.stellar.min.js"></script>
+
+	<!-- Magnific Popup -->
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/magnific-popup-options.js"></script>
+	
+	<!-- Main -->
 	<script src="js/main.js"></script>
+        </div>
 	</body>
 </html>
