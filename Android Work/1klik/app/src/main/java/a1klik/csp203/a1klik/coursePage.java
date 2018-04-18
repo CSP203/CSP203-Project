@@ -3,11 +3,17 @@ package a1klik.csp203.a1klik;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class coursePage extends AppCompatActivity {
     String InstructorName;
@@ -107,4 +113,84 @@ public class coursePage extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            Uri selectedImageUri = data.getData();
+
+            // Set image
+            //ImageView imageViewImage = (ImageView)findViewById(R.id.imageViewImage);
+            //imageViewImage.setImageURI(selectedImageUri);
+
+            // Save image
+            String destinationFilename = com.nettport.imageupload.imageupload.FilePath.getPath(this, selectedImageUri);
+
+            // Dynamic text
+            TextView textViewDynamicText = (TextView) findViewById(R.id.textViewDynamicText); // Dynamic text
+
+            // URL
+            String urlToApi = apiURL + "/image_upload.php";
+
+
+            // Toast
+            //Toast.makeText(this, "ID:"  + currentRecipeId, Toast.LENGTH_LONG).show();
+
+            // Data
+            Map mapData = new HashMap();
+            mapData.put("inp_api_password", apiPassword);
+
+            com.nettport.imageupload.imageupload.HttpRequestLongOperation task = new com.nettport.imageupload.imageupload.HttpRequestLongOperation(this, urlToApi, "post_image", mapData, destinationFilename, textViewDynamicText, new com.nettport.imageupload.imageupload.HttpRequestLongOperation.TaskListener() {
+                @Override
+                public void onFinished(String result) {
+                    // Do Something after the task has finished
+                    imageUploadResult();
+                }
+            });
+            task.execute();
+
+        }
+    }
+
+
+    public void imageUploadResult() {
+        // Dynamic text
+        TextView textViewDynamicText = (TextView)findViewById(R.id.textViewDynamicText);
+        String dynamicText = textViewDynamicText.getText().toString();
+
+        // Split
+        int index = dynamicText.lastIndexOf('/');
+        try {
+            currentImagePath = dynamicText.substring(0, index);
+        }
+        catch (Exception e){
+            Toast.makeText(this, "path: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+        try {
+            currentImage = dynamicText.substring(index,dynamicText.length());
+        }
+        catch (Exception e){
+            Toast.makeText(this, "image: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+        // Load new image
+        // Todo: loadImage();
+
+    } // imageUploadResult
+
+
+    /*- Load image ------------------------------------------------------------------ */
+    public void loadImage(){
+
+        // Load image
+        ImageView imageViewImage = (ImageView)findViewById(R.id.imageViewImage);
+
+        if(!(currentImagePath.equals("")) && !(currentImage.equals(""))){
+
+            String loadImage = websiteURL + "/" + currentImagePath + "/" + currentImage;
+            //new HttpRequestImageLoadTask(this, loadImage, imageViewImage).execute();
+
+        }
+    }
+
 }

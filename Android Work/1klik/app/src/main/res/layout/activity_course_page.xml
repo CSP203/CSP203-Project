@@ -61,7 +61,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Load_from_gallery" />
-
+        <TextView
+            android:id="@+id/textViewDynamicText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Potato World!" />
+        <ImageView
+            android:id="@+id/imageViewImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@mipmap/ic_launcher" />
 
 
     </LinearLayout>
