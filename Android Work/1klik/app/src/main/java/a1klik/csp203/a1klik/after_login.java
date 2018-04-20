@@ -26,7 +26,7 @@ public class after_login extends AppCompatActivity {
         setContentView(R.layout.after_login);
         String data= getIntent().getStringExtra("MyData");
         final String user_name=get_name(data);
-        int instructor_id=get_id(data);
+        final int instructor_id=get_id(data);
         set_header(user_name);
         try {
             BackgroundWorker backgroundWorker = new BackgroundWorker(this);
@@ -79,6 +79,7 @@ public class after_login extends AppCompatActivity {
                     newCoursePage.putExtra("courseName",mCourseList.get((int)id).getCourseName());
                     newCoursePage.putExtra("courseTitle", mCourseList.get((int)id).getCourseTitle());
                     newCoursePage.putExtra("UserName", user_name);
+                    newCoursePage.putExtra("Instructor_id",instructor_id);
                     startActivity(newCoursePage);
                     Toast.makeText(getApplicationContext(), "Clicked Course " + view.getTag(), Toast.LENGTH_SHORT).show();
                 }

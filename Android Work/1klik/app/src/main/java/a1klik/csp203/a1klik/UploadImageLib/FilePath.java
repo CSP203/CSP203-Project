@@ -1,4 +1,4 @@
-package com.nettport.imageupload.imageupload;
+package a1klik.csp203.a1klik.UploadImageLib;
 
 import android.content.ContentUris;
 import android.content.Context;
@@ -162,3 +162,4 @@ public class FilePath {
                 .getAuthority());
     }
 }
+

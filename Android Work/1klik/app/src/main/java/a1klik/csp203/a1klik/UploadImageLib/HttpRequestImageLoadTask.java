@@ -1,8 +1,4 @@
-package com.nettport.imageupload.imageupload;
-
-/**
- * Created by bruker on 09.08.2017.
- */
+package a1klik.csp203.a1klik.UploadImageLib;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -107,3 +103,4 @@ public class HttpRequestImageLoadTask extends AsyncTask<Void, Void, Bitmap> {
     }
 
 }
+

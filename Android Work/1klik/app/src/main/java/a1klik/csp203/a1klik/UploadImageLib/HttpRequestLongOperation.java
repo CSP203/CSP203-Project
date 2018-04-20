@@ -1,4 +1,5 @@
-package com.nettport.imageupload.imageupload;
+package a1klik.csp203.a1klik.UploadImageLib;
+
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,6 +23,7 @@ public class HttpRequestLongOperation extends AsyncTask<String, Void, String> {
     private Map<String, String> mapSend  = new HashMap<String, String>();
     private TextView textViewJSON;
     private final TaskListener taskListener; // This is the reference to the associated listener
+
 
 
     public interface TaskListener {
@@ -109,8 +111,9 @@ public class HttpRequestLongOperation extends AsyncTask<String, Void, String> {
 
                 String encodedImage = Base64.encodeToString(byteImage_photo,Base64.DEFAULT); //generate base64 string of image
 
-
+                mapSend.put("Instructor_name","Hi");
                 mapSend.put("inp_image_base", encodedImage);
+                //System.out.println("ENcoded Image :\n"+encodedImage);
                 stringResponse = HttpRequest.post(inputUrl).form(mapSend).body();
 
             } // post_image
