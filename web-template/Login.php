@@ -16,7 +16,7 @@ if (isset($_POST['submit']) ) {
         $host="localhost";
         $host_user="root";
         $host_pass="";
-        $connection = mysqli_connect($host, $host_user, $host_pass,"id5418435_oneclick");
+        $connection = mysqli_connect($host, $host_user, $host_pass,"oneclick");
         if ($connection->connect_error) {
                 die("Connection failed: " . $connection->connect_error);
             }
@@ -29,16 +29,19 @@ if (isset($_POST['submit']) ) {
         //$password = mysqli_real_escape_string($password);
         // SQL query to fetch information of registerd users and finds user match.
         $query = mysqli_query($connection,"Select * from instructor where instructor.email='$username' and instructor.IDPass='$password'" );
-        //$rows = mysqli_num_rows($query);
-        if ($query) 
-        {
-            $_SESSION['login_user']=$username; // Initializing Session
-            $test_string="Redirecting";
-            header("location: index.php"); // Redirecting To Other Page
+        $rows = mysqli_num_rows($query);
+        if ($rows==0) 
+        {   $error = "Username or Password is invalid";
+            
         } 
         else 
-        {
-            $error = "Username or Password is invalid";
+        {   $_SESSION['login_user']=$username;
+            //printf($rows);
+            //printf($rows[0]); // Initializing Session
+            $test_string="Redirecting";
+            header("location: index.php"); // Redirecting To Other Page
+        
+    
         }
         mysqli_close($connection); // Closing Connection
 

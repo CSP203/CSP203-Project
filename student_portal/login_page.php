@@ -1,9 +1,11 @@
+
 <?php
 include('Login.php'); // Includes Login Script
 if(isset($_SESSION['login_user'])){
     header("index.php"); 
 }
 ?>
+
 
 <!DOCTYPE HTML>
 
@@ -73,7 +75,7 @@ if(isset($_SESSION['login_user'])){
 				<div class="row">
 					<div class="col-xs-12 text-center menu-1">
 						<ul>
-							<li><a href="login.html">Login</a></li>
+							<li><a href="login_page.php">Login</a></li>
                             <li><a href="signup.html">SignUp</a></li>
                             <li><a href="index.html">Home</a></li>
 						</ul>
@@ -99,7 +101,7 @@ $('form').attr('autocomplete','off');
 			<div class="display-t">
 				<div class="display-tc">
 					<h1>Text1</h1>
-                    <form method="post" action="" autocomplete="off">
+                    <form method="post" action="" autocomplete="off" name="loginForm" onsubmit="return validateLoginForm()">
                         
                         <p> <input class="text-center" style="width:50%" id="login_email" type="email" placeholder="Email ID" name="email"></p>
                         <p> <input class="text-center" style="width:50%" id="login_pass" type="password" placeholder="Password" name="pass"></p>
@@ -120,6 +122,8 @@ $('form').attr('autocomplete','off');
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
+	<script  src="js/check.js"></script>
+	<!--form validation -->
 	<script  src="js/index.js"></script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
