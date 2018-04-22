@@ -1,6 +1,6 @@
 <?php
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-$connection = mysqli_connect("localhost", "root", "","id5418435_oneclick");
+$connection = mysqli_connect("localhost", "root", "","oneclick");
 
 session_start();// Starting Session
 // Storing Session

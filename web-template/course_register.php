@@ -3,7 +3,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $conn = mysqli_connect($servername, $username, $password,"id5418435_oneclick");
+    $conn = mysqli_connect($servername, $username, $password,"oneclick");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
@@ -31,31 +31,33 @@
         printf("Course registered succesfully");
         $sDirPath = 'C:/xampp/htdocs/course/'.$register_course_name.'/'; //Specified Pathname
         $csvpath=    'C:/xampp/htdocs/course/'.$register_course_name.'/'.$register_course_name.'.csv';
-        if (!file_exists ($sDirPath))
-
-        {
-              printf("Course folder created");
-                mkdir($sDirPath,0777,true);  
-        // open the file "demosaved.csv" for writing
+        if (file_exists ($sDirPath))
+        {printf("Folder for this course is already exist ");
+         }
+         else{    
+              mkdir($sDirPath,0777,true);
+              printf("Course folder created"); 
+         }      
+        // open the file  for writing
         $file = fopen($csvpath, 'w');
  
         // save the column headers
         fputcsv($file, array('SerialNumber','EntryNumber', 'StudentName'));
- 
+        printf("Course CSV FILE created");
         
         // Close the file
         fclose($file);        
 
-        }   
-        else
-        {
-            printf("Course folder not created");
-        }
+        //}   
+        //else
+        //{
+            //printf("Course CSV FILE  not created");
+        //}
         exit();
     }
     else 
     {
-        printf("Error occured,Please Retry\nRedirecting to signup page");
+        printf("Error occured,Please Retry\n");
         echo "Error: " . $enter_data . "<br>" . $conn->error;
     }
     mysqli_close($conn);

@@ -106,7 +106,7 @@ $('form').attr('autocomplete','off');
 			<div class="display-t">
 				<div class="display-tc">
 					<h1>Text1</h1>
-                    <form method="post" action="" autocomplete="off">
+                    <form name="loginForm" method="post" action="" autocomplete="off" onsubmit="return validateLoginForm()">
                         
                         <p> <input class="text-center" style="width:50%" id="login_email" type="email" placeholder="Email ID" name="email"></p>
                         <p> <input class="text-center" style="width:50%" id="login_pass" type="password" placeholder="Password" name="pass"></p>
@@ -127,6 +127,9 @@ $('form').attr('autocomplete','off');
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
+	<!-- form validation-->
+        <script src="js/check.js"></script>
+	<!-- jQuery -->
 	<script  src="js/index.js"></script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
