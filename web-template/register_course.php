@@ -1,6 +1,7 @@
 <?php
     include('session.php'); // Includes Login Script
 ?>
+
 <!DOCTYPE HTML>
 <!--
 	Aesthetic by gettemplates.co
@@ -86,14 +87,12 @@
 		</div>
 		<nav class="gtco-nav sticky-banner" role="navigation">
 			<div class="gtco-container">
-		
 				
-                
 				<div class="row">
 					<div class="col-xs-12 text-center menu-1">
 						<ul>
-							<li class="active"><a href="index.php">Home</a></li>
-							<li><a href="my_courses.html">My Courses</a></li>
+							<li ><a href="index.php">Home</a></li>
+							<li><a href="mycourses.html">My Courses</a></li>
 							<li><a href="blog.html">Blog</a></li>
 							<li><a href="contact.html">Contact Us</a></li>
 						</ul>
@@ -103,108 +102,34 @@
 			</div>
 		</nav>
 	</div>
+			<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_1.jpg)" data-stellar-background-ratio="0.5">
+               
+                <div class="gtco-container">
+                    <div class="row row-mt-15em">
+                        <div class="col-md-12 mt-text text-center animate-box" data-animate-effect="fadeInUp">
+                            <form method="post" name="CouresRegisterForm" action="course_insert.php" autocomplete="off" onsubmit="return validateCourseForm()">
+                                <p> <input class="text-center" style="width:50%" name="course_name" id="register_course_name" type="text" placeholder="Course Name"></p>
+                                <p> <input class="text-center" style="width:50%" name="course_title" id="register_course_title" type="text" placeholder="Course Title" width="wrap-parent"></p>
+                                <!--
+                                <div class="col-md-12" >
+                                    <div class="text-center"><a href="" class="btn btn-primary btn-lg ">Register</a></div>
+                                </div>
+                                -->
+                                <p> <input class="text-center btn btn-primary btn-lg" type="submit" value="Create" > </p>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </header>
+
 	
-	<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_4.jpg)" data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="gtco-container">
-			<div class="row row-mt-15em">
-				<div class="col-md-12 mt-text text-center animate-box" data-animate-effect="fadeInUp">
-					
-					<div class="text-center"><a href="register_course.php" >Register a new course</a></div>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<div class="flex-section gtco-gray-bg">
-		<div class="col-1">
-			<div class="text">
-
-				<div class="row row-pb-sm">
-					<div class="col-md-12">
-					<h2>Creative Minds</h2>
-					
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae accusamus, fugiat ut! Ducimus accusamus, quos. Esse ea iste, expedita atque quod quo maxime, saepe! Architecto unde aliquid atque excepturi dolores dolore fugit rem recusandae amet a, molestiae et! Dolore, laborum?</p>
-					<p>Quaerat quisquam quasi minima at molestias porro accusantium qui atque doloremque ab, odio tempora obcaecati cumque veritatis quo, assumenda nihil dolor optio enim fugit accusamus laborum. Autem neque dignissimos, corrupti, fugiat labore nisi illo, delectus, alias natus optio distinctio culpa!</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<ul class="check-li">
-							<li>Quaerat quisquam quasi</li>
-							<li>Accusantium qui atque doloremque</li>
-							<li>Expedita atque quod</li>
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<ul class="check-li">
-							<li>Quaerat quisquam quasi</li>
-							<li>Accusantium qui atque doloremque</li>
-							<li>Expedita atque quod</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="col-2 flex-img" style="background-image: url(images/img_1.jpg);"></div>
-	</div>
+		
 	
-	<div class="gtco-cover gtco-cover-sm" style="background-image: url(images/img_bg_2.jpg)"  data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="gtco-container text-center">
-			<div class="display-t">
-				<div class="display-tc">
-					<h1 class="animate-box">Never Stop Learning</h1>
-				</div>	
-			</div>
-		</div>
-	</div>
+	
+	
 
-	<div class="flex-section reverse">
-		<div class="col-1">
-			<div class="text">
-
-				<div class="row row-pb-sm">
-					<div class="col-md-12">
-						<h2>Expertise &amp; Beliefs</h2>
-						<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae accusamus, fugiat ut! Ducimus accusamus, quos. Esse ea iste, expedita atque quod quo maxime, saepe! Architecto unde aliquid atque excepturi dolores dolore fugit rem recusandae amet a, molestiae et! Dolore, laborum?</p>
-						<p>Quaerat quisquam quasi minima at molestias porro accusantium qui atque doloremque ab, odio tempora obcaecati cumque veritatis quo, assumenda nihil dolor optio enim fugit accusamus laborum. Autem neque dignissimos, corrupti, fugiat labore nisi illo, delectus, alias natus optio distinctio culpa!</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<ul class="check-li">
-							<li>Quaerat quisquam quasi</li>
-							<li>Accusantium qui atque doloremque</li>
-							<li>Expedita atque quod</li>
-						</ul>
-					</div>
-					<div class="col-md-6">
-						<ul class="check-li">
-							<li>Quaerat quisquam quasi</li>
-							<li>Accusantium qui atque doloremque</li>
-							<li>Expedita atque quod</li>
-						</ul>
-					</div>
-				</div>
-				
-			</div>
-		</div>
-		<div class="col-2 flex-img" style="background-image: url(images/img_bg_2.jpg);"></div>
-        </div>
-
-	<div class="gtco-cover gtco-cover-sm" style="background-image: url(images/img_bg_1.jpg)"  data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="gtco-container text-center">
-			<div class="display-t">
-				<div class="display-tc">
-					<h1>We have high quality services that you will surely love!</h1>
-				</div>	
-			</div>
-		</div>
-	</div>
-<footer id="gtco-footer" role="contentinfo">
+	<footer id="gtco-footer" role="contentinfo">
 		<div class="gtco-container">
 			<div class="row row-p	b-md">
 
@@ -235,13 +160,11 @@
 				<div class="col-md-3 col-md-push-1">
 					<div class="gtco-widget">
 						<h3>Get In Touch</h3>
-						<ul>
-							<li><a href="http://GetTemplates.co">Coders@OneClick</a></li>
-							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
-							<li class="email"><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-							
+						<ul class="gtco-quick-contact">
+							<li><a href="#"><i class="icon-phone"></i> +1 234 567 890</a></li>
+							<li><a href="#"><i class="icon-mail2"></i> info@GetTemplates.co</a></li>
+							<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
 						</ul>
-					
 					</div>
 				</div>
 
@@ -250,8 +173,8 @@
 			<div class="row copyright">
 				<div class="col-md-12">
 					<p class="pull-left">
-						<small class="block">&copy; OneClick Web Portal. All Rights Reserved.</small> 
-                        <small class="block">Designed by Prerna Garg, Vineet Mehta, Aditya Tiwari, Himanshu Parihar<br>IIT Ropar,Punjab</small>
+						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
+						<small class="block">Designed by <a href="http://GetTemplates.co/" target="_blank">GetTemplates.co</a> Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
 					</p>
 					<p class="pull-right">
 						<ul class="gtco-social-icons pull-right">
@@ -273,7 +196,8 @@
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
-	
+	<!-- form validation-->
+        <script src="js/check.js"></script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>
 	<!-- jQuery Easing -->
@@ -300,3 +224,4 @@
 
 	</body>
 </html>
+
