@@ -3,10 +3,13 @@ package a1klik.csp203.a1klik;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -162,6 +165,13 @@ public class coursePage extends AppCompatActivity {
             HttpRequestLongOperation task = new HttpRequestLongOperation(this, urlToApi, "post_image", mapData, destinationFilename, textViewDynamicText, new HttpRequestLongOperation.TaskListener() {
                 @Override
                 public void onFinished(String result) {
+                    System.out.println(result);
+                    byte[] decodedString = Base64.decode(result, Base64.DEFAULT);
+                    ImageView imageViewImage = (ImageView)findViewById(R.id.imageViewImage);
+                    TextView ShowScreen=(TextView)findViewById(R.id.textViewDynamicText);
+                    ShowScreen.setText(ShowScreen.getText().toString()+"\n Attendace:");
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    imageViewImage.setImageBitmap(decodedByte);
                     // Do Something after the task has finished
                     //imageUploadResult();
                 }
