@@ -1,4 +1,14 @@
 <?php
+function image_with_recognized_faces($location)
+{
+    $path=$location;
+    //$path = 'myfolder/myimage.png';
+    $type = pathinfo($path, PATHINFO_EXTENSION);
+    $data = file_get_contents($path);
+    $base64 =  base64_encode($data);
+    return $base64;
+}
+
 /*- User set variables ----------------------------------------------------------------- */
 // Variables
 $api_password = "qw2e3erty6uiop";
@@ -82,7 +92,7 @@ if(file_exists("$image_path")){
 		//echo"$image_final_path";
 		//printf("\n%s and %s\n",$instructor_name,$course_name);
 		printf("Please wait While we process the attendance\n");
-		
+		echo image_with_recognized_faces($image_final_path);
 	}
 }
 
