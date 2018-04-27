@@ -38,7 +38,8 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
     @Override
     protected String doInBackground(String... params) {
         String type = params[0];
-        String login_url = "http://1klik.000webhostapp.com/AndroidLogin/login.php";
+
+        String login_url = context.getResources().getString(R.string.loginPHPLink);
         if(type.equals("login")) {
             try {
                 String user_name = params[1];
@@ -71,15 +72,15 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             }
             catch (MalformedURLException e) {
                 System.out.println("Well found an Exception here in BackgroundWorker 1");
-                ExceptionHandlerRedirector useThis=new ExceptionHandlerRedirector();
-                useThis.loadNewActivity();
+                //ExceptionHandlerRedirector useThis=new ExceptionHandlerRedirector();
+                //useThis.loadNewActivity();
                 e.getMessage();
                 e.printStackTrace();
             }
             catch (IOException e) {
                 System.out.println("Well found an Exception in BackgroundWorker 2");
-                ExceptionHandlerRedirector useThis=new ExceptionHandlerRedirector();
-                useThis.loadNewActivity();
+                //ExceptionHandlerRedirector useThis=new ExceptionHandlerRedirector();
+                //useThis.loadNewActivity();
                 e.getMessage();
                 e.printStackTrace();
             }
@@ -116,14 +117,14 @@ public class BackgroundWorker extends AsyncTask<String,Void,String> {
             }
             catch (MalformedURLException e) {
                 System.out.println("Well found an Exception in BackgroundWorker 3");
-                ExceptionHandlerRedirector useThis=new ExceptionHandlerRedirector();
-                useThis.loadNewActivity();
+                //ExceptionHandlerRedirector useThis=new ExceptionHandlerRedirector();
+                //useThis.loadNewActivity();
                 e.printStackTrace();
             }
             catch (IOException e) {
                 System.out.println("Well found an Exception in BackgroundWorker 4");
-                ExceptionHandlerRedirector useThis=new ExceptionHandlerRedirector();
-                useThis.loadNewActivity();
+                //ExceptionHandlerRedirector useThis=new ExceptionHandlerRedirector();
+                //useThis.loadNewActivity();
                 e.printStackTrace();
             }
         }

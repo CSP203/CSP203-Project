@@ -2,6 +2,7 @@ package a1klik.csp203.a1klik;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,6 +25,7 @@ import a1klik.csp203.a1klik.UploadImageLib.HttpRequestImageLoadTask;
 import a1klik.csp203.a1klik.UploadImageLib.HttpRequestLongOperation;
 
 public class coursePage extends AppCompatActivity {
+    public static final String PREFS_NAME = "LoginPrefs";
     String InstructorName;
     String CourseName;
     String courseTitle;
@@ -31,9 +33,15 @@ public class coursePage extends AppCompatActivity {
     int id;
     int instructor_id;
     /* Api variables */
-    String websiteURL   = "https://1klik.000webhostapp.com/ImageUpload/images";
-    String apiURL       = "https://1klik.000webhostapp.com/ImageUpload/api"; // Without ending slash
-    String apiPassword  = "qw2e3erty6uiop";
+    String websiteURL  ;
+    String apiURL  ;
+    String apiPassword  ;
+
+//    String websiteURL1   = getResources().getString(R.string.StoreFileLink).toString();
+//    String apiURL1       = getResources().getString(R.string.UploadPHPFileLink).toString(); // Without ending slash
+//    String apiPassword1  = getResources().getString(R.string.ImageUploadApiPass).toString();
+
+
 
     /* Current image */
     String currentImagePath = "";
@@ -44,14 +52,26 @@ public class coursePage extends AppCompatActivity {
     private Intent PHOTO_SELECTED_FROM_GALLERY=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        websiteURL   = getResources().getString(R.string.StoreFileLink).toString();
+        apiURL       = getResources().getString(R.string.UploadPHPFileLink).toString(); // Without ending slash
+        apiPassword  = getResources().getString(R.string.ImageUploadApiPass).toString();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_page);
-        InstructorName= getIntent().getStringExtra("UserName");
-        CourseName= getIntent().getStringExtra("courseName");
-        CourseID= getIntent().getIntExtra("course_id",-1);
-        courseTitle= getIntent().getStringExtra("courseTitle");
-        instructor_id=getIntent().getIntExtra("Instructor_id",-1);
-        id= getIntent().getIntExtra("id",-1);
+
+        this.InstructorName= getIntent().getStringExtra(getResources().getString(R.string.SetDataUserName));
+        this.CourseName= getIntent().getStringExtra(getResources().getString(R.string.SetDataCourseName));
+        this.CourseID= getIntent().getIntExtra(getResources().getString(R.string.SetDataCourseId),-1);
+        this.courseTitle= getIntent().getStringExtra(getResources().getString(R.string.SetDataCourseTitle));
+        this.instructor_id=getIntent().getIntExtra(getResources().getString(R.string.SetDataInstructorID),-1);
+        this.id= getIntent().getIntExtra(getResources().getString(R.string.SetDataId),-1);
+
+//        this.InstructorName= getIntent().getStringExtra("UserName");
+//        this.CourseName= getIntent().getStringExtra("courseName");
+//        this.CourseID= getIntent().getIntExtra("course_id",-1);
+//        this.courseTitle= getIntent().getStringExtra("courseTitle");
+//        this.instructor_id=getIntent().getIntExtra("Instructor_id",-1);
+//        this.id= getIntent().getIntExtra("id",-1);
+
         ((TextView)findViewById(R.id.loginUserName)).setText(InstructorName);
         ((TextView)findViewById(R.id.courseShowScreen)).setText(CourseName);
         StoredAfterActivityResult=null;
@@ -63,10 +83,7 @@ public class coursePage extends AppCompatActivity {
         //buttonListener();
 
     }
-    public void onLogout(View view)
-    {
 
-    }
 
     /*- Check permission Read ---------------------------------------------------------- */
 // Pops up message to user for reading
@@ -235,7 +252,7 @@ public class coursePage extends AppCompatActivity {
     {
         if (StoredAfterActivityResult==null)
         {
-            Toast.makeText(this, "Please select the photo first", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getString(R.string.SelectPhotoFirst), Toast.LENGTH_LONG).show();
             return;
         }
         else
