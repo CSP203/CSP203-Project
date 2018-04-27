@@ -162,6 +162,29 @@ CREATE TABLE `student` (
 
 TRUNCATE TABLE `student`;
 
+--
+-- Table structure for table `Student_Attendance`
+--
+
+DROP TABLE IF EXISTS `Student_Attendance`;
+CREATE TABLE `Student_Attendance` (
+  `CourseID` int(11) NOT NULL,
+  `StudentID` int(11) DEFAULT NULL,
+  `InstructorID` int(11) NOT NULL,
+  `dateTaken` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `attendanceStatus` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Truncate table before insert `Student_Attendance`
+--
+
+TRUNCATE TABLE `Student_Attendance`;
+--
+-- Indexes for dumped tables
+--
+
+
 INSERT INTO `student` (`StudentID`, `IDPass`, `FirstName`, `LastName`, `email`) VALUES
 (1, 'A', 'A', 'A', 'A@iitrpr.ac.in'),
 (2, 'B', 'B', 'B', 'B@iitrpr.ac.in'),
@@ -185,7 +208,7 @@ ALTER TABLE `course`
 --
 ALTER TABLE `instructor`
   ADD PRIMARY KEY (`InstructorID`);
-
+  
 --
 -- Indexes for table `Instructor_courses`
 --
@@ -198,6 +221,14 @@ ALTER TABLE `Instructor_courses`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`StudentID`);
+
+--
+-- Indexes for table `Student_Attendance`
+--
+ALTER TABLE `Student_Attendance`
+  ADD PRIMARY KEY (`CourseID`,`InstructorID`),
+  ADD KEY `StudentID` (`StudentID`),
+  ADD KEY `InstructorID` (`InstructorID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -227,6 +258,15 @@ ALTER TABLE `student`
 ALTER TABLE `Instructor_courses`
   ADD CONSTRAINT `Instructor_courses_ibfk_1` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`) ON DELETE CASCADE,
   ADD CONSTRAINT `Instructor_courses_ibfk_2` FOREIGN KEY (`InstructorID`) REFERENCES `instructor` (`InstructorID`) ON DELETE CASCADE;
+  
+--
+-- Constraints for table `Student_Attendance`
+--
+ALTER TABLE `Student_Attendance`
+  ADD CONSTRAINT `Student_Attendance_ibfk_1` FOREIGN KEY (`CourseID`) REFERENCES `course` (`CourseID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Student_Attendance_ibfk_2` FOREIGN KEY (`StudentID`) REFERENCES `student` (`StudentID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Student_Attendance_ibfk_3` FOREIGN KEY (`InstructorID`) REFERENCES `instructor` (`InstructorID`) ON DELETE CASCADE;
+  
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
