@@ -1,11 +1,5 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $conn = mysqli_connect($servername, $username, $password,"oneclick");
-    if ($conn->connect_error){
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include('database.php');
     $signup_first_name=$_POST['first_name'];
     $signup_second_name=$_POST['second_name'];
     $signup_email=$_POST['email'];
@@ -19,7 +13,7 @@
         exit();
     }
     $isValid="Select email from student";
-    $result = mysqli_query($conn,$isValid);
+    $result = mysqli_query($connection,$isValid);
     if ($result)
     {
         while ($row=mysqli_fetch_row($result))

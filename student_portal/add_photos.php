@@ -1,3 +1,10 @@
+<?php
+	include('session.php');
+	include('database.php');
+	$id=$_GET['id'];
+//?id=<?php echo $id
+?>
+
 <!DOCTYPE HTML>
 
 <html>
@@ -12,7 +19,7 @@
  <!-- form validation-->
         <script src="js/check.js"></script>
 	
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
@@ -63,8 +70,7 @@
 	<div class="page-inner">
 
 	<div id="head-top" style="position: absolute; width: 100%; top: 0; ">
-		
-        <div class="gtco-top">
+		<div class="gtco-top">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-6 col-xs-6">
@@ -81,16 +87,18 @@
 				</div>
 			</div>	
 		</div>
-        
 		<nav class="gtco-nav sticky-banner" role="navigation">
 			<div class="gtco-container">
+		
 				
+                
 				<div class="row">
 					<div class="col-xs-12 text-center menu-1">
 						<ul>
-							<li><a href="login_page.php">Login</a></li>
-                            <li class="active"><a href="signup.html">SignUp</a></li>
-                            <li><a href="index.html">Home</a></li>
+							<li class="active"><a href="index.php">Home</a></li>
+							<li><a href="mycourse.php">My Courses</a></li>
+							<li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="logout.php">Log Out</a></li>
 						</ul>
 					</div>
 				</div>
@@ -104,28 +112,12 @@
 		<div class="gtco-container">
 			<div class="row row-mt-15em">
 				<div class="col-md-12 mt-text text-center animate-box" data-animate-effect="fadeInUp">
-                
-                    <form method="post" name="SignupForm" action="signup.php" autocomplete="off" onsubmit="return validateSignupForm()">    
-                        <p> <input class="text-center" style="width:50%" name="first_name" id="register_first_name" type="text" placeholder="First Name"></p>
-                        <p> <input class="text-center" style="width:50%" name="second_name" id="register_second_name" type="text" placeholder="Second Name" width="wrap-parent"></p>
-                        <p> <input class="text-center" style="width:50%" name="email" id="register_email" type="text" placeholder="Email ID"></p>
-                        <p> <input class="text-center" style="width:50%" name="pass1" id="register_pass1" type="password" placeholder="Password "></p>
-                        <p> <input class="text-center" style="width:50%" name="pass2" id="register_pass2" type="password" placeholder="Confirm Password"></p>
-                        <!--
-                        <div class="col-md-12" >
-                            <div class="text-center"><a href="" class="btn btn-primary btn-lg ">Register</a></div>
-                        </div>
-                        -->
-                        <p> <input class="text-center btn btn-primary btn-lg" type="submit" value="Register" onclick="Register.php"> <input class="text-center btn btn-primary btn-lg" type="reset" value="Reset">
-                        </p>
-                        <!--<?php
-                            if(isset($_SESSION["error"])){
-                                $error = $_SESSION["error"];
-                                echo "<span>$error</span>";
-                            }
-                        ?>-->
-                    </form>
-					
+				  
+		<form method="post" action="upload2.php?id=<?php echo $id;?>" enctype="multipart/form-data">
+		  <input style="position:relative;width:800px;" name="upload[]" id="upload" type="file" multiple="multiple" />
+		  
+		  <input class="w3-button w3-green" type="submit" name="submit" value="Submit"/>
+		</form>
 				</div>
 			</div>
 		</div>

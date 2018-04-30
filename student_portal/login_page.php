@@ -1,11 +1,11 @@
-
 <?php
 include('Login.php'); // Includes Login Script
+//include('delete.php');
+include('database.php');
 if(isset($_SESSION['login_user'])){
     header("index.php"); 
 }
 ?>
-
 
 <!DOCTYPE HTML>
 
@@ -69,13 +69,31 @@ if(isset($_SESSION['login_user'])){
 
 	<div id="head-top" style="position: absolute; width: 100%; top: 0; ">
 		
+        <div class="gtco-top">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6 col-xs-6">
+						<div id="gtco-logo"><a href="index.php">OneClick <em>.</em></a></div>
+					</div>
+					<div class="col-md-6 col-xs-6 social-icons">
+						<ul class="gtco-social-top">
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-instagram"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>	
+		</div>
+        
 		<nav class="gtco-nav sticky-banner" role="navigation">
 			<div class="gtco-container">
 				
 				<div class="row">
 					<div class="col-xs-12 text-center menu-1">
 						<ul>
-							<li><a href="login_page.php">Login</a></li>
+							<li  class="active"><a href="login.html">Login</a></li>
                             <li><a href="signup.html">SignUp</a></li>
                             <li><a href="index.html">Home</a></li>
 						</ul>
@@ -101,7 +119,7 @@ $('form').attr('autocomplete','off');
 			<div class="display-t">
 				<div class="display-tc">
 					<h1>Text1</h1>
-                    <form method="post" action="" autocomplete="off" name="loginForm" onsubmit="return validateLoginForm()">
+                    <form method="post" action="" autocomplete="off">
                         
                         <p> <input class="text-center" style="width:50%" id="login_email" type="email" placeholder="Email ID" name="email"></p>
                         <p> <input class="text-center" style="width:50%" id="login_pass" type="password" placeholder="Password" name="pass"></p>
@@ -122,8 +140,6 @@ $('form').attr('autocomplete','off');
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
-	<script  src="js/check.js"></script>
-	<!--form validation -->
 	<script  src="js/index.js"></script>
 	<!-- jQuery -->
 	<script src="js/jquery.min.js"></script>

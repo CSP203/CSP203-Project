@@ -1,4 +1,6 @@
 <?php
+
+require('database.php');
 session_start(); // Starting Session
 $error=''; // Variable To Store Error Message
 $test_string="well this is a test string";
@@ -15,13 +17,7 @@ if (isset($_POST['submit']) ) {
         $email=$_POST['email'];
         $password=$_POST['pass'];
         // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-        $host="localhost";
-        $host_user="root";
-        $host_pass="";
-        $connection = mysqli_connect($host, $host_user, $host_pass,"oneclick");
-        if ($connection->connect_error) {
-            die("Connection failed: " . $connection->connect_error);
-        }
+        
         $username = stripslashes($email);
         $password = stripslashes($password);
         // SQL query to fetch information of registerd users and finds user match.

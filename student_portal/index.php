@@ -11,7 +11,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>OneClick</title>
+	<title>Honest &mdash; Free Website Template, Free HTML5 Template by GetTemplates.co</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Website Template by GetTemplates.co" />
 	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
@@ -93,8 +93,9 @@
 					<div class="col-xs-12 text-center menu-1">
 						<ul>
 							<li class="active"><a href="index.php">Home</a></li>
-							<li><a href="mycourse.html">My Courses</a></li>
+							<li><a href="mycourse.php">My Courses</a></li>
 							<li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="logout.php">Log Out</a></li>
 						</ul>
 					</div>
 				</div>
@@ -115,18 +116,6 @@
 			</div>
 		</div>
 	</header>
-        
-      <!--  
-	<div class="gtco-cover gtco-cover-sm" style="background-image: url(images/img_bg_2.jpg)"  data-stellar-background-ratio="0.5">
-		<div class="overlay"></div>
-		<div class="gtco-container text-center">
-			<div class="display-t">
-				<div class="display-tc">
-					<h1 class="animate-box">Never Stop Learning</h1>
-				</div>	
-			</div>
-		</div>
-	</div>-->
 
 	<div class="flex-section gtco-gray-bg">
 		<div class="col-1">
@@ -158,11 +147,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-2 flex-img" style="background-image: url(images/img_1.jpg);"></div>
+		<div class="col-2 flex-img" style="background-image: url(/var/www/html/csp203/student_portal/images/img_1.jpg)"></div>
 	</div>
 	
 
-	<div class="gtco-cover gtco-cover-sm" style="background-image: url(images/img_bg_1.jpg)"  data-stellar-background-ratio="0.5">
+	<div class="gtco-cover gtco-cover-sm" style="background-image: url(/var/www/html/csp203/student_portal/images/img_bg_1.jpg)"  data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="gtco-container text-center">
 			<div class="display-t">
@@ -221,14 +210,14 @@
 						<small class="block">&copy; OneClick Web Portal. All Rights Reserved.</small> 
                         <small class="block">Designed by Prerna Garg, Vineet Mehta, Aditya Tiwari, Himanshu Parihar<br>IIT Ropar,Punjab</small>
 					</p>
-					<p class="pull-right">
+					
 						<ul class="gtco-social-icons pull-right">
 							<li><a href="#"><i class="icon-twitter"></i></a></li>
 							<li><a href="#"><i class="icon-facebook"></i></a></li>
 							<li><a href="#"><i class="icon-linkedin"></i></a></li>
 							<li><a href="#"><i class="icon-dribbble"></i></a></li>
 						</ul>
-					</p>
+					
 				</div>
 			</div>
 

@@ -1,5 +1,7 @@
 <?php
+	@ob_start();
     session_start();
+    include('database.php');
 ?>
 <!DOCTYPE HTML>
 <!--
@@ -56,6 +58,21 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+	<style>
+	.button {
+		background-color: #4CAF50;
+		border: none;
+		color: white;
+		padding: 15px 32px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+
+</style>
 	</head>
 	<body>
 		
@@ -89,9 +106,10 @@
 				<div class="row">
 					<div class="col-xs-12 text-center menu-1">
 						<ul>
-							<li class="active"><a href="index.php">Home</a></li>
-							<li><a href="mycourse.html">My Courses</a></li>
+							<li ><a href="index.php">Home</a></li>
+							<li><a href="mycourse.php">My Courses</a></li>
 							<li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="logout.php">Log Out</a></li>
 						</ul>
 					</div>
 				</div>
@@ -118,39 +136,61 @@
 
 				<div class="row">
                 <?php
-                    $servername = "localhost";
-                    $username = "root";
-                    $password = "";
-                    $conn = mysqli_connect($servername, $username, $password,"oneclick");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+                    
                     $email = $_SESSION['login_user'];
+                    $entryNum=explode('@',$email)[0];
+                    $student_dir = "/var/www/html/csp203/student_images/".$entryNum.'/';
                     $get_sql = "SELECT StudentID FROM student WHERE email=\"$email\"";
-                    $res = mysqli_query($conn,$get_sql);
+                    $res = mysqli_query($connection,$get_sql);
                     if($res){
-                        $get_id = "tmp";
+                        $get_id = 0;
+                        //echo $get_id;
                         while ($row=mysqli_fetch_row($res)){
                             $get_id = $row[0];
                         }
-                        $sql="SELECT FirstName,cn FROM instructor INNER JOIN (SELECT InstructorID, alias1.CourseName as cn FROM instructor_courses INNER JOIN (Select CourseName,CourseID from course WHERE CourseID NOT IN (SELECT CourseID FROM student_attendance WHERE StudentID = $get_id ))alias1 ON alias1.CourseID = instructor_courses.CourseID)alias2 ON alias2.InstructorID = instructor.InstructorID;";
-                        $result = mysqli_query($conn,$sql);
+                        $sql="SELECT FirstName,LastName,cn,instructor.InstructorID,ccid FROM instructor INNER JOIN (SELECT InstructorID, alias1.CourseName as cn,cid as ccid FROM Instructor_courses INNER JOIN (Select CourseName,CourseID as cid from course WHERE CourseID NOT IN (SELECT CourseID FROM Student_Attendance WHERE StudentID = $get_id ))alias1 ON alias1.cid = Instructor_courses.CourseID)alias2 ON alias2.InstructorID = instructor.InstructorID;";
+                        $result = mysqli_query($connection,$sql);
                         if ($result)
                         {
-                            echo "<ol style=\"font-size:30px;\">";
-                            echo "<form method= \"post\"";
+	                        echo "<h1>Following is the list of available courses:</h1><br>";
+                            echo "<form method= \"post\">"; 
+                            $iter = 0;               
+                            $data = array();
                             while ($row=mysqli_fetch_row($result))
                             {
-                                $cour = $row['cn'];
-                                $prof = $row['FirstName'];
-                                echo "<li><input type=\"checkbox\" name=\"$cour\" value=\"$cour\"> Course: $cour - Instructor: $prof</li>"; 
+                            	$data[] = $row;
+                                $cour = $row[2];
+                                $prof = $row[0];
+                                $prof2 = $row[1];
+                                echo "<h3><label><input type=\"checkbox\" name=\"check_list[]\" value=\"$iter\"> <strong>Course:</strong> $cour - <strong>Instructor:</strong> $prof $prof2</label></h3>";
+                                $iter = $iter + 1;
                             }
-                            echo "</form></ol>";
+                            
+                            echo "<input class=\"button\" type=\"submit\" name=\"submit\" value=\"Submit\"/></form>";
+		                    
+		                    if(isset($_POST['submit'])){//to run PHP script on submit
+								if(!empty($_POST['check_list'])){
+								$a = [];
+								// Loop to store and display values of individual checked checkbox.
+									foreach($_POST['check_list'] as $selected){
+										$a[] = $selected;
+						        	}
+						        	foreach ($a as $index){
+						        		$course_id =  $data[$index][4];
+						        		$prof_id = $data[$index][3];
+						        		$sql = "INSERT INTO Student_Attendance (CourseID,StudentID,InstructorID) VALUES ($course_id,$get_id,$prof_id)";
+						        		$result = mysqli_query($connection,$sql);
+						        		header("refresh:0 , join_course.php");
+						        	}
+						        }else{
+						        	echo '<script language="javascript">alert("Please select courses before you submit.")</script>';
+						        }
+						    }
                         }
-                        echo "<h1>No courses found to register for. Please talk to your course instructor to verify if he has added the course you are looking for.</h1><br><h2>Have a nice day :)</h2>";
                     }else{
+                    	echo "<h1>No courses found to register for. Please talk to your course instructor to verify if he has added the course you are looking for.</h1><br><h2>Have a nice day :)</h2>";
                     }
-                    mysqli_close($conn);
+                    mysqli_close($connection);
                 ?>
 				</div>
 			</div>

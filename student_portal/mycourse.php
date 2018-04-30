@@ -1,4 +1,9 @@
 <!DOCTYPE HTML>
+<?php
+	@ob_start();
+    session_start();
+    include('database.php');
+?>
 <!--
 	Aesthetic by gettemplates.co
 	Twitter: http://twitter.com/gettemplateco
@@ -26,7 +31,7 @@
 	<meta name="twitter:card" content="" />
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-	
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -52,9 +57,10 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-
+	<style>
+	.w3-button {width:150px;}
+	</style>
 	</head>
-
 	<body>
 		
 	<div class="gtco-loader"></div>
@@ -84,95 +90,82 @@
 		</div>
 		<nav class="gtco-nav sticky-banner" role="navigation">
 			<div class="gtco-container">
+				
 				<div class="row">
 					<div class="col-xs-12 text-center menu-1">
 						<ul>
 							<li><a href="index.php">Home</a></li>
-							<li><a href="mycourse.php">My Courses</a></li>
-							<li class="active"><a href="contact.html">Contact Us</a></li>
+							<li class="active"><a href="mycourse.php">My Courses</a></li>
+							<li><a href="contact.html">Contact Us</a></li>
                             <li><a href="logout.php">Log Out</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
-		</nav>
-	</div>
+		</nav></div>
 	
-	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(images/img_bg_3.jpg)" data-stellar-background-ratio="0.5">
+	<header id="gtco-header" class="gtco-cover gtco-cover-sm" role="banner" style="background-image: url(images/img_bg_4.jpg)" data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="gtco-container">
 			<div class="row row-mt-15em">
 				<div class="col-md-7 mt-text text-left animate-box" data-animate-effect="fadeInUp">
-					<h1>Get <strong>In Touch</strong></h1>	
-					<h2>Far far away, behind the word mountains, far from the countries Vokalia.</h2>
+					<h1>My Courses.</h1>	
+					<h2>Following is the list of courses you have registered for.</h2>
 				</div>
 			</div>
 		</div>
 	</header>
 
-	<div class="gtco-section gtco-gray-bg">
-		<div class="gtco-container">
-			<div class="row">
+<div>
+		<div class="col-1">
+			<div class="text">
 
-				<div class="col-md-12">
-					<div class="col-md-6 animate-box">
-					<h3>Get In Touch</h3>
-					<form action="mailto:gargprerna10@gmail.com" method="post">
-						<div class="row form-group">
-							<div class="col-md-12">
-								<label class="sr-only" for="name">Name</label>
-								<input type="text" id="name" class="form-control" placeholder="Your firstname">
-							</div>
-							
-						</div>
-
-						<div class="row form-group">
-							<div class="col-md-12">
-								<label class="sr-only" for="email">Email</label>
-								<input type="text" id="email" class="form-control" placeholder="Your email address">
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col-md-12">
-								<label class="sr-only" for="subject">Subject</label>
-								<input type="text" id="subject" class="form-control" placeholder="Your subject of this message">
-							</div>
-						</div>
-
-						<div class="row form-group">
-							<div class="col-md-12">
-								<label class="sr-only" for="message">Message</label>
-								<textarea name="message" id="message" cols="30" rows="10" class="form-control" placeholder="Write us something"></textarea>
-							</div>
-						</div>
-						<div class="form-group">
-							<input type="submit" value="Send Message" class="btn btn-primary">
-						</div>
-
-					</form>		
+				<div class="row">
+                <?php
+                    
+                    $email = $_SESSION['login_user'];
+                    $get_sql = "SELECT StudentID,FirstName,LastName FROM student WHERE email=\"$email\"";
+                    $res = mysqli_query($connection,$get_sql);
+                    if($res){
+                        $get_id = 0;
+                        
+                        while ($row=mysqli_fetch_row($res)){
+                            $get_id = $row[0];
+                            $fname = $row[1];
+                            $lname = $row[2];
+                        }
+                        
+                        
+                        $sql="SELECT cn,ct FROM instructor INNER JOIN (SELECT InstructorID, alias1.CourseName as cn,cid as ccid,alias1.CourseTitle as ct FROM Instructor_courses INNER JOIN (Select CourseName,CourseID as cid,CourseTitle from course WHERE CourseID IN (SELECT CourseID FROM Student_Attendance WHERE StudentID = $get_id ))alias1 ON alias1.cid = Instructor_courses.CourseID)alias2 ON alias2.InstructorID = instructor.InstructorID;";
+                        $result = mysqli_query($connection,$sql);
+                        if ($result)
+                        {
+                        	echo "<div class=\"gtco-section gtco-gray-bg\"><div class=\"gtco-container\"><div class=\"row\">";
+                        	echo "<h1 style=\"color: black; font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0;\">&nbspName: $fname $lname</h1>";
+	                        echo "<h2 style=\"color: black; font-family: 'Trocchi', serif; font-size: 35px; font-weight: normal; line-height: 48px; margin: 0;\">&nbsp&nbspEmail: $email</h2>";
+	                        echo "<p>&nbsp&nbsp&nbsp&nbsp&nbsp<a href=\"add_photos.php?id=$get_id\"><button class=\"w3-button w3-green\">Add Photos</button></a></p>";
+	                        
+	                        
+                            while ($row2=mysqli_fetch_row($result))
+                            {
+                            	$coursename = $row2[0];
+                            	$coursetitle = $row2[1];
+                            	echo "<div class=\"col-lg-4 col-md-4 col-sm-6\"><a href=\"#\" class=\"gtco-card-item\"><figure><div class=\"overlay\"><i class=\"ti-plus\"></i></div><img src=\"images/img_1.jpg\" alt=\"Image\" class=\"img-responsive\"></figure><div class=\"gtco-text\"><h2>$coursename</h2><p></p><p class=\"gtco-category\"><span style=\"font-size: 20px;\">Click to view the attendance details ...</span></p></div></a></div>" ;
+                            }
+                            echo "</div></div></div>";
+                            
+                        }
+                    }else{
+                    	echo "<h1>No courses found to register for. Please talk to your course instructor to verify if he has added the course you are looking for.</h1><br><h2>Have a nice day :)</h2>";
+                    }
+                    mysqli_close($connection);
+                ?>
 				</div>
-				<div class="col-md-5 col-md-push-1 animate-box">
-					
-					<div class="gtco-contact-info">
-						<h3>Contact Information</h3>
-						<ul>
-							<li class="address">Nangal Road, Rupnagar<br> IIT Ropar, Punjab, 140001</li>
-							<li><a href="http://GetTemplates.co">Coders@OneClick</a></li>
-							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
-							<li class="email"><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-							
-						</ul>
-					</div>
-
-
-				</div>
-				</div>
-
 			</div>
 		</div>
 	</div>
-        
+
+
 	<footer id="gtco-footer" role="contentinfo">
 		<div class="gtco-container">
 			<div class="row row-p	b-md">
@@ -204,13 +197,11 @@
 				<div class="col-md-3 col-md-push-1">
 					<div class="gtco-widget">
 						<h3>Get In Touch</h3>
-						<ul>
-							<li><a href="http://GetTemplates.co">Coders@OneClick</a></li>
-							<li class="phone"><a href="tel://1234567920">+ 1235 2355 98</a></li>
-							<li class="email"><a href="mailto:info@yoursite.com">info@yoursite.com</a></li>
-							
+						<ul class="gtco-quick-contact">
+							<li><a href="#"><i class="icon-phone"></i> +1 234 567 890</a></li>
+							<li><a href="#"><i class="icon-mail2"></i> info@GetTemplates.co</a></li>
+							<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
 						</ul>
-					
 					</div>
 				</div>
 
@@ -219,17 +210,18 @@
 			<div class="row copyright">
 				<div class="col-md-12">
 					<p class="pull-left">
-						<small class="block">&copy; OneClick Web Portal. All Rights Reserved.</small> 
-                        <small class="block">Designed by Prerna Garg, Vineet Mehta, Aditya Tiwari, Himanshu Parihar<br>IIT Ropar,Punjab</small>
+						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
+						<small class="block">Designed by <a href="http://GetTemplates.co/" target="_blank">GetTemplates.co</a> Demo Images: <a href="http://unsplash.com/" target="_blank">Unsplash</a></small>
 					</p>
-					<p class="pull-right">
+					
+					
 						<ul class="gtco-social-icons pull-right">
 							<li><a href="#"><i class="icon-twitter"></i></a></li>
 							<li><a href="#"><i class="icon-facebook"></i></a></li>
 							<li><a href="#"><i class="icon-linkedin"></i></a></li>
 							<li><a href="#"><i class="icon-dribbble"></i></a></li>
 						</ul>
-					</p>
+					
 				</div>
 			</div>
 
